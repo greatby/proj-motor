@@ -1,6 +1,6 @@
 export function GET() {
-  const baseUrl = "https://yourwebsite.com";
-  const lastmod = "2025-11-14";
+  const baseUrl = "https://proj-hospitality.vercel.app";
+  const lastmod = new Date().toISOString().split("T")[0];
 
   const urls = [
     {
@@ -10,38 +10,44 @@ export function GET() {
       lastmod,
     },
     {
-      loc: `${baseUrl}/cars-complete-guide.html`,
+      loc: `${baseUrl}/restaurants`,
       changefreq: "weekly",
       priority: "0.9",
       lastmod,
     },
     {
-      loc: `${baseUrl}/motorcycles-complete-guide.html`,
+      loc: `${baseUrl}/hotels`,
       changefreq: "weekly",
       priority: "0.9",
       lastmod,
     },
     {
-      loc: `${baseUrl}/electric-vehicles-guide.html`,
+      loc: `${baseUrl}/cafes`,
       changefreq: "weekly",
       priority: "0.9",
       lastmod,
     },
+    {
+      loc: `${baseUrl}/pubs-bars`,
+      changefreq: "weekly",
+      priority: "0.9",
+      lastmod,
+    }
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls
-  .map(
-    (u) => `
+    .map(
+      (u) => `
   <url>
     <loc>${u.loc}</loc>
     <lastmod>${u.lastmod}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
     <priority>${u.priority}</priority>
   </url>`
-  )
-  .join("")}
+    )
+    .join("")}
 </urlset>`;
 
   return new Response(xml, {
